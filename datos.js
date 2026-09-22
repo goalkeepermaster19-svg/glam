@@ -12,13 +12,13 @@ const glam = {
     mensajePortada:
         "Haz que tus invitados sean parte del espectáculo.",
 
-    telefono: "72514906",
+    telefono: "78784526",
 
     // ==========================================
     // REDES Y CONTACTO
     // ==========================================
 
-    whatsapp: "59172514906",
+    whatsapp: "59178784526",
 
     paginaWeb: "",
 
