@@ -1,0 +1,3773 @@
+/* =========================================================
+   GLAM — ESPEJO MÁGICO
+   VISUAL IDENTITY 2.0
+   Editorial / Pink Luxury / Mirror
+========================================================= */
+
+
+/* =========================================================
+   FUENTES
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --fucsia: #d90073;
+    --fucsia-oscuro: #b80060;
+    --fucsia-claro: #ef4b9b;
+
+    --rosa: #f8d9e8;
+    --rosa-suave: #fff1f7;
+
+    --crema: #fffaf8;
+    --blanco: #ffffff;
+
+    --negro: #171316;
+    --negro-suave: #302a2d;
+
+    --gris: #756c71;
+
+    --linea: rgba(23, 19, 22, .10);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    background:
+        var(--crema);
+
+    color:
+        var(--negro);
+
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
+::selection {
+
+    background:
+        var(--fucsia);
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background:
+        var(--crema);
+}
+
+::-webkit-scrollbar-thumb {
+
+    background:
+        var(--fucsia);
+
+    border-radius:
+        20px;
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+main {
+
+    width: 100%;
+
+    overflow: hidden;
+
+}
+
+section {
+    position: relative;
+}
+
+.oculto {
+    display: none;
+}
+
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.portada {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(12,8,10,.15),
+            rgba(12,8,10,.58)
+        ),
+
+        url("imagenes/portada.jpg")
+        center / cover no-repeat;
+
+}
+
+
+/* brillo fucsia */
+
+.portada::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        650px;
+
+    height:
+        650px;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(217,0,115,.16);
+
+    filter:
+        blur(100px);
+
+    pointer-events:
+        none;
+
+}
+
+
+/* marco exterior */
+
+.portada::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   CONTENIDO PORTADA
+========================================================= */
+
+.portada-contenido {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    max-width:
+        950px;
+
+    animation:
+        portadaEntrada 1.2s ease both;
+
+}
+
+
+/* pequeño texto superior */
+
+.portada-contenido::before {
+
+    content:
+        "ESPEJO MÁGICO";
+
+    display:
+        block;
+
+    margin-bottom:
+        22px;
+
+    color:
+        rgba(255,255,255,.85);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        7px;
+
+}
+
+
+/* =========================================================
+   GLAM — TIPOGRAFÍA PRINCIPAL
+========================================================= */
+
+.portada h1 {
+
+    margin:
+        0;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(80px, 16vw, 190px);
+
+    font-weight:
+        500;
+
+    font-style:
+        italic;
+
+    letter-spacing:
+        -4px;
+
+    line-height:
+        .78;
+
+    color:
+        white;
+
+    text-shadow:
+        0 15px 45px
+        rgba(0,0,0,.40);
+
+    animation:
+        glamFlota 4s ease-in-out infinite;
+
+}
+
+
+/* =========================================================
+   SUBTÍTULO
+========================================================= */
+
+.portada h2 {
+
+    margin:
+        35px 0 22px;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size:
+        clamp(14px, 2vw, 19px);
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        8px;
+
+    color:
+        white;
+
+}
+
+
+/* mensaje */
+
+.portada p {
+
+    max-width:
+        620px;
+
+    margin:
+        0 auto 38px;
+
+    color:
+        rgba(255,255,255,.90);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+}
+
+
+/* =========================================================
+   BOTÓN DESCUBRE LA EXPERIENCIA
+========================================================= */
+
+.boton-principal {
+
+    position:
+        relative;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        15px;
+
+    min-width:
+        230px;
+
+    padding:
+        16px 25px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.55);
+
+    border-radius:
+        50px;
+
+    background:
+        rgba(217,0,115,.92);
+
+    color:
+        white;
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        2px;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+/* brillo que atraviesa */
+
+.boton-principal::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        -120%;
+
+    width:
+        70%;
+
+    height:
+        100%;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent,
+            rgba(255,255,255,.55),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    animation:
+        botonBrillo 3.5s ease-in-out infinite;
+
+}
+
+
+/* flecha */
+
+.boton-principal::after {
+
+    content:
+        "→";
+
+    position:
+        relative;
+
+    font-size:
+        19px;
+
+    font-weight:
+        400;
+
+    line-height:
+        1;
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.boton-principal:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+
+    box-shadow:
+        0 18px 45px
+        rgba(217,0,115,.38);
+
+}
+
+
+.boton-principal:hover::after {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================================
+   ENCABEZADOS
+========================================================= */
+
+.seccion-encabezado {
+
+    max-width:
+        780px;
+
+    margin:
+        0 auto 60px;
+
+    padding:
+        0 20px;
+
+    text-align:
+        center;
+
+}
+
+
+.etiqueta-glam {
+
+    margin:
+        0 0 15px;
+
+    color:
+        var(--fucsia);
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        4px;
+
+}
+
+
+.seccion-encabezado h2 {
+
+    margin:
+        0 0 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(48px, 7vw, 78px);
+
+    font-weight:
+        500;
+
+    line-height:
+        .9;
+
+}
+
+
+.seccion-encabezado h2 span {
+
+    display:
+        block;
+
+    color:
+        var(--fucsia);
+
+    font-style:
+        italic;
+
+}
+
+
+.seccion-encabezado p:last-child {
+
+    max-width:
+        650px;
+
+    margin:
+        auto;
+
+    color:
+        var(--gris);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+}
+
+
+/* =========================================================
+   BIENVENIDA
+========================================================= */
+
+.bienvenida {
+
+    max-width:
+        1250px;
+
+    margin:
+        auto;
+
+    padding:
+        140px 35px;
+
+}
+
+
+/* =========================================================
+   PRESENTACIÓN
+========================================================= */
+
+.glam-presentacion {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap:
+        100px;
+
+    align-items:
+        center;
+
+}
+
+
+/* =========================================================
+   ESPEJO GLAM
+========================================================= */
+
+.glam-presentacion > div:first-child {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+}
+
+
+/*
+   Si la imagen está directamente dentro
+   de la presentación
+*/
+
+.glam-presentacion img {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    width:
+        min(100%, 430px);
+
+    height:
+        560px;
+
+    object-fit:
+        cover;
+
+    border-radius:
+        215px 215px 25px 25px;
+
+    border:
+        4px solid
+        var(--blanco);
+
+    outline:
+        1px solid
+        rgba(217,0,115,.55);
+
+    outline-offset:
+        8px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(40,10,25,.15);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+
+}
+
+
+/* aro decorativo */
+
+.glam-presentacion > div:first-child::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        1;
+
+    width:
+        min(100%, 430px);
+
+    height:
+        560px;
+
+    top:
+        15px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        rgba(217,0,115,.30);
+
+    border-radius:
+        215px 215px 25px 25px;
+
+}
+
+
+/* brillo del espejo */
+
+.glam-presentacion > div:first-child::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        3;
+
+    width:
+        90px;
+
+    height:
+        90px;
+
+    top:
+        55px;
+
+    right:
+        8%;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,.25);
+
+    filter:
+        blur(25px);
+
+    pointer-events:
+        none;
+
+}
+
+
+.glam-presentacion img:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 35px 75px
+        rgba(217,0,115,.16);
+
+}
+
+
+/* =========================================================
+   SERVICIOS
+========================================================= */
+
+.servicios-glam {
+
+    padding:
+        140px 30px;
+
+    background:
+        var(--blanco);
+
+}
+
+
+.servicios-grid {
+
+    max-width:
+        1150px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        1px;
+
+    border:
+        1px solid
+        var(--linea);
+
+    background:
+        var(--linea);
+
+}
+
+
+.servicio-card {
+
+    position:
+        relative;
+
+    min-height:
+        235px;
+
+    padding:
+        40px 30px;
+
+    background:
+        white;
+
+    transition:
+        .3s ease;
+
+}
+
+
+.servicio-card:hover {
+
+    background:
+        var(--rosa-suave);
+
+}
+
+
+.servicio-icono {
+
+    font-size:
+        33px;
+
+    margin-bottom:
+        17px;
+
+}
+
+
+.servicio-card h3 {
+
+    margin:
+        0 0 12px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        29px;
+
+    font-weight:
+        600;
+
+}
+
+
+.servicio-card p {
+
+    margin:
+        0;
+
+    color:
+        var(--gris);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.servicio-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        30px;
+
+    bottom:
+        25px;
+
+    width:
+        30px;
+
+    height:
+        2px;
+
+    background:
+        var(--fucsia);
+
+    transition:
+        width .3s ease;
+
+}
+
+
+.servicio-card:hover::after {
+
+    width:
+        65px;
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+.eventos-glam {
+
+    padding:
+        140px 30px;
+
+    background:
+        var(--crema);
+
+}
+
+
+.eventos-grid {
+
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        20px;
+
+}
+
+
+.evento-card {
+
+    position:
+        relative;
+
+    min-height:
+        440px;
+
+    overflow:
+        hidden;
+
+    background:
+        #222;
+
+    border-radius:
+        2px;
+
+}
+
+
+.evento-card img {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform .7s ease;
+
+}
+
+
+.evento-card:hover img {
+
+    transform:
+        scale(1.07);
+
+}
+
+
+.evento-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            transparent 25%,
+            rgba(15,8,12,.90)
+        );
+
+}
+
+
+.evento-card-contenido {
+
+    position:
+        absolute;
+
+    z-index:
+        2;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    padding:
+        32px;
+
+}
+
+
+.evento-card h3 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        white;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        36px;
+
+    font-weight:
+        500;
+
+}
+
+
+.evento-card p {
+
+    margin:
+        0;
+
+    color:
+        rgba(255,255,255,.80);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   PAQUETES
+========================================================= */
+
+.paquetes-glam {
+
+    padding:
+        140px 30px;
+
+    background:
+        white;
+
+}
+
+
+.paquetes-grid {
+
+    max-width:
+        1100px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        20px;
+
+}
+
+
+.paquete-card {
+
+    position:
+        relative;
+
+    padding:
+        50px 35px;
+
+    text-align:
+        center;
+
+    background:
+        var(--crema);
+
+    border:
+        1px solid
+        var(--linea);
+
+    transition:
+        .3s ease;
+
+}
+
+
+.paquete-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 25px 60px
+        rgba(30,10,20,.10);
+
+}
+
+
+.paquete-card:nth-child(2) {
+
+    border-color:
+        rgba(217,0,115,.38);
+
+}
+
+
+.paquete-card:nth-child(2)::before {
+
+    content:
+        "MÁS ELEGIDO";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    padding:
+        7px 16px;
+
+    background:
+        var(--fucsia);
+
+    color:
+        white;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.paquete-card h3 {
+
+    margin:
+        0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        37px;
+
+    font-weight:
+        600;
+
+}
+
+
+.paquete-precio {
+
+    margin:
+        18px 0;
+
+    color:
+        var(--fucsia);
+
+    font-size:
+        25px;
+
+    font-weight:
+        800;
+
+}
+
+
+.paquete-card p {
+
+    color:
+        var(--gris);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.paquete-card ul {
+
+    list-style:
+        none;
+
+    padding:
+        0;
+
+    margin:
+        30px 0;
+
+}
+
+
+.paquete-card li {
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.06);
+
+    color:
+        var(--gris);
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   COTIZACIÓN
+========================================================= */
+
+.cotizacion-glam {
+
+    position:
+        relative;
+
+    padding:
+        140px 30px;
+
+    overflow:
+        hidden;
+
+    text-align:
+        center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff0f7,
+            #fffaf8 50%,
+            #f9e1ed
+        );
+
+}
+
+
+.cotizacion-glam::before {
+
+    content:
+        "GLAM";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-style:
+        italic;
+
+    font-size:
+        27vw;
+
+    color:
+        rgba(217,0,115,.035);
+
+    pointer-events:
+        none;
+
+}
+
+
+.boton-cotizacion-principal {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    margin-top:
+        25px;
+
+    padding:
+        17px 30px;
+
+    border:
+        none;
+
+    background:
+        var(--fucsia);
+
+    color:
+        white;
+
+    border-radius:
+        50px;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .3s ease;
+
+}
+
+
+.boton-cotizacion-principal:hover {
+
+    background:
+        var(--fucsia-oscuro);
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-cotizacion {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+    background:
+        rgba(20,10,15,.72);
+
+    backdrop-filter:
+        blur(9px);
+
+}
+
+
+.modal-cotizacion.activo {
+
+    display:
+        flex;
+
+}
+
+
+.cotizacion-contenido {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    max-width:
+        650px;
+
+    max-height:
+        90vh;
+
+    overflow-y:
+        auto;
+
+    padding:
+        45px;
+
+    background:
+        var(--crema);
+
+    border:
+        1px solid
+        rgba(217,0,115,.22);
+
+    box-shadow:
+        0 35px 100px
+        rgba(0,0,0,.35);
+
+}
+
+
+.cerrar-cotizacion {
+
+    position:
+        absolute;
+
+    top:
+        15px;
+
+    right:
+        18px;
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border:
+        1px solid
+        rgba(0,0,0,.12);
+
+    border-radius:
+        50%;
+
+    background:
+        transparent;
+
+    color:
+        var(--negro);
+
+    font-size:
+        25px;
+
+    cursor:
+        pointer;
+
+}
+
+
+.cerrar-cotizacion:hover {
+
+    color:
+        var(--fucsia);
+
+    border-color:
+        var(--fucsia);
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.campo-glam {
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.campo-glam label {
+
+    display:
+        block;
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--negro);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.campo-glam input,
+.campo-glam select,
+.campo-glam textarea {
+
+    width:
+        100%;
+
+    padding:
+        14px 15px;
+
+    border:
+        1px solid
+        rgba(0,0,0,.12);
+
+    border-radius:
+        3px;
+
+    background:
+        white;
+
+    color:
+        var(--negro);
+
+    font-size:
+        13px;
+
+    outline:
+        none;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.campo-glam input:focus,
+.campo-glam select:focus,
+.campo-glam textarea:focus {
+
+    border-color:
+        var(--fucsia);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(217,0,115,.07);
+
+}
+
+
+.campo-glam input::placeholder,
+.campo-glam textarea::placeholder {
+
+    color:
+        #aaa;
+
+}
+
+
+.campo-glam textarea {
+
+    min-height:
+        120px;
+
+    resize:
+        vertical;
+
+}
+
+
+.campo-glam select option {
+
+    background:
+        white;
+
+    color:
+        var(--negro);
+
+}
+
+
+/* botón enviar */
+
+.boton-whatsapp {
+
+    width:
+        100%;
+
+    padding:
+        16px;
+
+    border:
+        none;
+
+    border-radius:
+        50px;
+
+    background:
+        var(--fucsia);
+
+    color:
+        white;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .25s ease;
+
+}
+
+
+.boton-whatsapp:hover {
+
+    background:
+        var(--fucsia-oscuro);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   CONTACTO
+========================================================= */
+
+.contacto-glam {
+
+    padding:
+        110px 30px;
+
+    text-align:
+        center;
+
+    background:
+        var(--negro);
+
+    color:
+        white;
+
+}
+
+
+.contacto-glam p {
+
+    color:
+        rgba(255,255,255,.65);
+
+    line-height:
+        1.8;
+
+}
+
+
+.contacto-glam a {
+
+    color:
+        var(--fucsia-claro);
+
+    text-decoration:
+        none;
+
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
+#codigoQR {
+
+    width:
+        130px;
+
+    height:
+        130px;
+
+    margin:
+        25px auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        white;
+
+    color:
+        var(--negro);
+
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final {
+
+    position:
+        relative;
+
+    padding:
+        110px 20px;
+
+    text-align:
+        center;
+
+    background:
+        #110d10;
+
+    overflow:
+        hidden;
+
+}
+
+
+.final::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        420px;
+
+    height:
+        420px;
+
+    top:
+        -280px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(217,0,115,.15);
+
+    filter:
+        blur(70px);
+
+}
+
+
+.final h2 {
+
+    position:
+        relative;
+
+    margin:
+        0;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(65px, 10vw, 120px);
+
+    font-style:
+        italic;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        2px;
+
+    line-height:
+        .8;
+
+    color:
+        white;
+
+}
+
+
+.final p {
+
+    position:
+        relative;
+
+    margin-top:
+        30px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================================================
+   BOTÓN MÚSICA
+========================================================= */
+
+#botonMusica {
+
+    position:
+        fixed;
+
+    right:
+        20px;
+
+    bottom:
+        20px;
+
+    z-index:
+        5000;
+
+    width:
+        52px;
+
+    height:
+        52px;
+
+    border:
+        1px solid
+        var(--fucsia);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,250,248,.94);
+
+    color:
+        var(--fucsia);
+
+    font-size:
+        19px;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.15);
+
+    transition:
+        .25s ease;
+
+}
+
+
+#botonMusica:hover {
+
+    background:
+        var(--fucsia);
+
+    color:
+        white;
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   VISOR DE FOTOS
+========================================================= */
+
+#visorFoto {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        10000;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        30px;
+
+    background:
+        rgba(15,8,12,.94);
+
+    backdrop-filter:
+        blur(7px);
+
+}
+
+
+#visorFoto.activo {
+
+    display:
+        flex;
+
+}
+
+
+#fotoGrande {
+
+    max-width:
+        90vw;
+
+    max-height:
+        85vh;
+
+    object-fit:
+        contain;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.65);
+
+}
+
+
+#cerrarFoto,
+#fotoAnterior,
+#fotoSiguiente {
+
+    position:
+        absolute;
+
+    border:
+        1px solid
+        rgba(255,255,255,.30);
+
+    background:
+        rgba(20,10,15,.70);
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s ease;
+
+}
+
+
+#cerrarFoto:hover,
+#fotoAnterior:hover,
+#fotoSiguiente:hover {
+
+    color:
+        var(--fucsia-claro);
+
+    border-color:
+        var(--fucsia);
+
+}
+
+
+#cerrarFoto {
+
+    top:
+        20px;
+
+    right:
+        25px;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border-radius:
+        50%;
+
+    font-size:
+        25px;
+
+}
+
+
+#fotoAnterior,
+#fotoSiguiente {
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    border-radius:
+        50%;
+
+    font-size:
+        25px;
+
+}
+
+
+#fotoAnterior {
+    left: 20px;
+}
+
+#fotoSiguiente {
+    right: 20px;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes portadaEntrada {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes glamFlota {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-1deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-6px)
+            rotate(1deg);
+
+    }
+
+}
+
+
+@keyframes botonBrillo {
+
+    0% {
+
+        left:
+            -120%;
+
+    }
+
+    45%,
+    100% {
+
+        left:
+            150%;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .glam-presentacion {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            70px;
+
+    }
+
+
+    .glam-presentacion img {
+
+        height:
+            500px;
+
+    }
+
+
+    .servicios-grid,
+    .eventos-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .paquetes-grid {
+
+        grid-template-columns:
+            1fr;
+
+        max-width:
+            500px;
+
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portada {
+
+        padding:
+            25px 15px;
+
+    }
+
+
+    .portada::after {
+
+        inset:
+            10px;
+
+    }
+
+
+    .portada-contenido::before {
+
+        letter-spacing:
+            4px;
+
+        font-size:
+            8px;
+
+    }
+
+
+    .portada h1 {
+
+        font-size:
+            82px;
+
+        letter-spacing:
+            -2px;
+
+    }
+
+
+    .portada h2 {
+
+        margin-top:
+            30px;
+
+        font-size:
+            12px;
+
+        letter-spacing:
+            4px;
+
+    }
+
+
+    .portada p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .bienvenida,
+    .servicios-glam,
+    .eventos-glam,
+    .paquetes-glam,
+    .cotizacion-glam {
+
+        padding:
+            90px 15px;
+
+    }
+
+
+    .seccion-encabezado {
+
+        margin-bottom:
+            45px;
+
+    }
+
+
+    .seccion-encabezado h2 {
+
+        font-size:
+            50px;
+
+    }
+
+
+    .glam-presentacion img {
+
+        width:
+            min(100%, 350px);
+
+        height:
+            450px;
+
+        border-radius:
+            175px 175px 20px 20px;
+
+    }
+
+
+    .glam-presentacion > div:first-child::before {
+
+        width:
+            min(100%, 350px);
+
+        height:
+            450px;
+
+        border-radius:
+            175px 175px 20px 20px;
+
+    }
+
+
+    .servicios-grid,
+    .eventos-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .evento-card {
+
+        min-height:
+            390px;
+
+    }
+
+
+    .cotizacion-contenido {
+
+        padding:
+            38px 20px;
+
+    }
+
+
+    .final {
+
+        padding:
+            90px 20px;
+
+    }
+
+
+    .final h2 {
+
+        font-size:
+            72px;
+
+    }
+
+
+    #fotoAnterior {
+
+        left:
+            8px;
+
+    }
+
+
+    #fotoSiguiente {
+
+        right:
+            8px;
+
+    }
+
+}
+/* =========================================================
+   BOTÓN EXPERIENCIA GLAM
+========================================================= */
+
+.boton-glam-experiencia {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px 24px 17px 28px;
+
+    border: 1px solid rgba(255,255,255,.65);
+
+    border-radius: 50px;
+
+    background: rgba(217,0,115,.92);
+
+    color: white;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+
+/* pequeño texto */
+
+.boton-glam-experiencia span {
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* texto principal */
+
+.boton-glam-experiencia strong {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+}
+
+
+/* flecha */
+
+.boton-glam-experiencia i {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: var(--fucsia);
+
+    font-size: 18px;
+
+    font-style: normal;
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+/* brillo */
+
+.boton-glam-experiencia::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 70%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    animation:
+        glamBotonBrillo 4s ease-in-out infinite;
+
+}
+
+
+.boton-glam-experiencia:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(217,0,115,.35);
+
+}
+
+
+.boton-glam-experiencia:hover i {
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+@keyframes glamBotonBrillo {
+
+    0% {
+        left: -100%;
+    }
+
+    45%,
+    100% {
+        left: 150%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .boton-glam-experiencia {
+
+        padding:
+            15px 18px 15px 22px;
+
+    }
+
+    .boton-glam-experiencia strong {
+
+        font-size:
+            19px;
+
+    }
+
+}
+/* =========================================================
+   BIENVENIDA — CORRECCIÓN
+========================================================= */
+
+.glam-presentacion {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        430px 1fr;
+
+    gap:
+        100px;
+
+    align-items:
+        center;
+
+}
+
+
+/* contenedor del espejo */
+
+.glam-espejo {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        580px;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+}
+
+
+/* imagen */
+
+.glam-espejo img {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    width:
+        390px;
+
+    height:
+        540px;
+
+    object-fit:
+        cover;
+
+    border-radius:
+        195px 195px 25px 25px;
+
+    border:
+        4px solid white;
+
+    outline:
+        1px solid rgba(217,0,115,.55);
+
+    outline-offset:
+        8px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(40,10,25,.15);
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.glam-espejo img:hover {
+
+    transform:
+        translateY(-7px);
+
+}
+
+
+/* segundo marco */
+
+.glam-espejo::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        1;
+
+    width:
+        390px;
+
+    height:
+        540px;
+
+    border:
+        1px solid
+        rgba(217,0,115,.30);
+
+    border-radius:
+        195px 195px 25px 25px;
+
+    transform:
+        translate(14px, 14px);
+
+}
+
+
+/* pequeño brillo */
+
+.glam-espejo::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        3;
+
+    top:
+        70px;
+
+    right:
+        15px;
+
+    width:
+        80px;
+
+    height:
+        80px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,.30);
+
+    filter:
+        blur(22px);
+
+    pointer-events:
+        none;
+
+}
+
+
+/* texto */
+
+.glam-presentacion-texto {
+
+    max-width:
+        600px;
+
+}
+
+
+.glam-presentacion-texto h2 {
+
+    margin:
+        0 0 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(55px, 7vw, 85px);
+
+    line-height:
+        .82;
+
+    font-weight:
+        500;
+
+}
+
+
+.glam-presentacion-texto h2 span {
+
+    display:
+        block;
+
+    color:
+        var(--fucsia);
+
+    font-style:
+        italic;
+
+}
+
+
+.glam-presentacion-texto p:not(.etiqueta-glam) {
+
+    color:
+        var(--gris);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+    margin:
+        0 0 18px;
+
+}
+
+
+@media (max-width: 900px) {
+
+    .glam-presentacion {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            70px;
+
+    }
+
+    .glam-espejo {
+
+        height:
+            520px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .glam-espejo {
+
+        height:
+            470px;
+
+    }
+
+    .glam-espejo img {
+
+        width:
+            310px;
+
+        height:
+            430px;
+
+        border-radius:
+            155px 155px 20px 20px;
+
+    }
+
+    .glam-espejo::before {
+
+        width:
+            310px;
+
+        height:
+            430px;
+
+        border-radius:
+            155px 155px 20px 20px;
+
+    }
+
+}
+/* =========================================================
+   MOMENTOS GLAM
+========================================================= */
+
+.momentos-glam {
+
+    padding:
+        140px 30px;
+
+    background:
+        var(--crema);
+
+}
+
+
+/* galería */
+
+.galeria-glam {
+
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        18px;
+
+}
+
+
+/* fotografía */
+
+.foto-glam {
+
+    position:
+        relative;
+
+    height:
+        360px;
+
+    overflow:
+        hidden;
+
+    cursor:
+        pointer;
+
+    background:
+        #eee;
+
+}
+
+
+/* imagen */
+
+.foto-glam img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform .6s ease;
+
+}
+
+
+/* capa */
+
+.foto-glam::after {
+
+    content:
+        "VER";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.7);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        70px;
+
+    height:
+        70px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(217,0,115,.90);
+
+    color:
+        white;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+    opacity:
+        0;
+
+    transition:
+        .3s ease;
+
+}
+
+
+.foto-glam:hover img {
+
+    transform:
+        scale(1.06);
+
+}
+
+
+.foto-glam:hover::after {
+
+    opacity:
+        1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+}
+
+
+/* tablet */
+
+@media (max-width: 900px) {
+
+    .galeria-glam {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* celular */
+
+@media (max-width: 600px) {
+
+    .momentos-glam {
+
+        padding:
+            90px 15px;
+
+    }
+
+    .galeria-glam {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            12px;
+
+    }
+
+    .foto-glam {
+
+        height:
+            360px;
+
+    }
+
+}
+/* =====================================================
+   EVENTOS GLAM - CATALOGO
+===================================================== */
+
+.eventos-glam {
+    position: relative;
+    padding: 120px 7%;
+    background: var(--crema);
+    overflow: hidden;
+}
+
+
+/* Decoración sutil de fondo */
+
+.eventos-glam::before {
+    content: "GLAM";
+    position: absolute;
+    top: 40px;
+    right: -40px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 180px;
+    font-weight: 600;
+
+    color: rgba(217, 0, 115, 0.035);
+
+    pointer-events: none;
+}
+
+
+/* ENCABEZADO */
+
+.eventos-glam .seccion-encabezado {
+    position: relative;
+    z-index: 2;
+
+    max-width: 720px;
+    margin: 0 auto 65px;
+
+    text-align: center;
+}
+
+
+.eventos-glam .seccion-encabezado h2 {
+    margin-bottom: 18px;
+}
+
+
+.eventos-glam .seccion-encabezado h2 span {
+    color: var(--fucsia);
+}
+
+
+.eventos-glam .seccion-encabezado > p:last-child {
+    max-width: 600px;
+    margin: auto;
+
+    color: var(--gris);
+    line-height: 1.8;
+}
+
+
+/* GRID */
+
+.eventos-grid {
+    position: relative;
+    z-index: 2;
+
+    max-width: 1250px;
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 45px 28px;
+}
+
+
+/* TARJETA */
+
+.evento-glam-card {
+    background: var(--blanco);
+
+    border: 1px solid var(--linea);
+
+    box-shadow:
+        0 15px 45px rgba(23, 19, 22, 0.07);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+
+    overflow: hidden;
+}
+
+
+.evento-glam-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 25px 60px rgba(23, 19, 22, 0.13);
+}
+
+
+/* IMAGEN */
+
+.evento-glam-imagen {
+    position: relative;
+
+    height: 330px;
+
+    overflow: hidden;
+
+    background: #eee;
+}
+
+
+.evento-glam-imagen img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.7s ease;
+}
+
+
+.evento-glam-card:hover
+.evento-glam-imagen img {
+    transform: scale(1.06);
+}
+
+
+/* NUMERO */
+
+.evento-glam-numero {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    color: var(--fucsia);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+}
+
+
+/* INFORMACION */
+
+.evento-glam-info {
+    padding: 27px 28px 30px;
+}
+
+
+.evento-glam-etiqueta {
+    margin: 0 0 8px;
+
+    color: var(--fucsia);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.evento-glam-info h3 {
+    margin: 0 0 12px;
+
+    color: var(--negro);
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 34px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+.evento-glam-info p:last-child {
+    margin: 0;
+
+    color: var(--gris);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* PEQUEÑO DETALLE INFERIOR */
+
+.evento-glam-info::after {
+    content: "✦";
+
+    display: block;
+
+    margin-top: 22px;
+
+    color: var(--fucsia);
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .eventos-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 30px 22px;
+    }
+
+    .evento-glam-imagen {
+        height: 300px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .eventos-glam {
+        padding: 80px 20px;
+    }
+
+    .eventos-glam::before {
+        font-size: 100px;
+        right: -20px;
+    }
+
+    .eventos-glam .seccion-encabezado {
+        margin-bottom: 45px;
+    }
+
+    .eventos-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .evento-glam-imagen {
+        height: 320px;
+    }
+
+    .evento-glam-info {
+        padding: 24px 22px 27px;
+    }
+
+    .evento-glam-info h3 {
+        font-size: 32px;
+    }
+
+}
+
+/* =====================================================
+   EVENTOS GLAM - DISEÑO PREMIUM
+   ===================================================== */
+
+.eventos-glam {
+    position: relative;
+    padding: 110px 7%;
+    background: var(--crema);
+    overflow: hidden;
+}
+
+
+/* Fondo decorativo */
+
+.eventos-glam::before {
+    content: "GLAM";
+    position: absolute;
+    top: 30px;
+    right: -20px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 190px;
+    font-weight: 600;
+    line-height: 1;
+    color: rgba(217, 0, 115, 0.035);
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   ENCABEZADO
+   ===================================================== */
+
+.eventos-glam .seccion-encabezado {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+
+.eventos-glam .seccion-encabezado h2 span {
+    color: var(--fucsia);
+}
+
+
+.eventos-glam .seccion-encabezado > p:last-child {
+    max-width: 620px;
+    margin: 0 auto;
+    color: var(--gris);
+    font-family: "DM Sans", sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   GRID
+   ===================================================== */
+
+.eventos-glam .eventos-grid {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px 28px;
+}
+
+
+/* =====================================================
+   TARJETAS
+   ===================================================== */
+
+.eventos-glam .evento-glam-card {
+    position: relative;
+
+    background: var(--blanco);
+
+    border: 1px solid rgba(217, 0, 115, 0.12);
+
+    box-shadow:
+        0 12px 35px rgba(23, 19, 22, 0.08);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+
+.eventos-glam .evento-glam-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 25px 55px rgba(23, 19, 22, 0.15);
+}
+
+
+/* Línea superior */
+
+.eventos-glam .evento-glam-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--fucsia);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s ease;
+    z-index: 5;
+}
+
+
+.eventos-glam .evento-glam-card:hover::before {
+    transform: scaleX(1);
+}
+
+
+/* =====================================================
+   IMAGEN
+   ===================================================== */
+
+.eventos-glam .evento-glam-imagen {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    background: #eeeeee;
+}
+
+
+.eventos-glam .evento-glam-imagen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition:
+        transform 0.7s ease;
+}
+
+
+/* Zoom */
+
+.eventos-glam .evento-glam-card:hover .evento-glam-imagen img {
+    transform: scale(1.07);
+}
+
+
+/* Degradado */
+
+.eventos-glam .evento-glam-imagen::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 35%;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.38),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   NUMERO
+   ===================================================== */
+
+.eventos-glam .evento-glam-numero {
+    position: absolute;
+
+    top: 16px;
+    left: 16px;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    color: var(--fucsia);
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.15);
+
+    z-index: 3;
+}
+
+
+/* =====================================================
+   INFORMACION
+   ===================================================== */
+
+.eventos-glam .evento-glam-info {
+    position: relative;
+    padding: 27px 28px 30px;
+    background: var(--blanco);
+}
+
+
+/* Etiqueta */
+
+.eventos-glam .evento-glam-etiqueta {
+    margin: 0 0 7px;
+
+    color: var(--fucsia);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* Titulo */
+
+.eventos-glam .evento-glam-info h3 {
+    margin: 0 0 12px;
+
+    color: var(--negro);
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 35px;
+    font-weight: 600;
+
+    line-height: 1;
+}
+
+
+/* Descripcion */
+
+.eventos-glam .evento-glam-info p:last-of-type {
+    margin: 0;
+
+    color: var(--gris);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* Detalle final */
+
+.eventos-glam .evento-glam-info::after {
+    content: "✦";
+
+    display: block;
+
+    margin-top: 20px;
+
+    color: var(--fucsia);
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .eventos-glam .eventos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 22px;
+    }
+
+    .eventos-glam .evento-glam-imagen {
+        height: 300px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+    .eventos-glam {
+        padding: 80px 20px;
+    }
+
+
+    .eventos-glam::before {
+        font-size: 100px;
+        right: -15px;
+    }
+
+
+    .eventos-glam .seccion-encabezado {
+        margin-bottom: 45px;
+    }
+
+
+    .eventos-glam .eventos-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+
+    .eventos-glam .evento-glam-imagen {
+        height: 310px;
+    }
+
+
+    .eventos-glam .evento-glam-info {
+        padding: 24px 22px 27px;
+    }
+
+
+    .eventos-glam .evento-glam-info h3 {
+        font-size: 33px;
+    }
+
+}
