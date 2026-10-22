@@ -228,7 +228,7 @@ const glam = {
 
             duracion: "3 HORAS",
 
-            precio: "Bs. 3100",
+            precio: "Bs. 3.100",
 
             descripcion:
                 "Más tiempo, más diversión y más recuerdos.",
@@ -254,7 +254,7 @@ const glam = {
 
             duracion: "4 HORAS",
 
-            precio: "Bs. 4000",
+            precio: "Bs. 4.000",
 
             descripcion:
                 "La experiencia GLAM completa para tu evento.",
