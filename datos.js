@@ -5,7 +5,7 @@ const glam = {
     // ==========================================
 
     nombre: "GLAM",
-    servicio: "ESPEJO MÁGICO",
+    servicio: "MIRROR EXPERIENCE",
 
     slogan: "Experiencias que todos recuerdan",
 
