@@ -1,81 +1,291 @@
+
 document.addEventListener("DOMContentLoaded", function () {
+    "use strict";
 
     /* =========================================
        DATOS GLAM
     ========================================= */
 
     if (typeof glam !== "undefined") {
-
         const nombreNovia = document.getElementById("nombreNovia");
         const nombreNovio = document.getElementById("nombreNovio");
+        const numeroDia = document.getElementById("numeroDia");
+        const telefonos = document.querySelectorAll(".contacto-datos span");
 
         if (nombreNovia) {
-            nombreNovia.textContent = glam.nombre;
+            nombreNovia.textContent = glam.nombreNovia || "GLAM";
         }
 
         if (nombreNovio) {
-            nombreNovio.textContent = glam.servicio;
+            nombreNovio.textContent =
+                glam.nombreNovio || "MIRROR EXPERIENCE";
         }
 
-        const numeroDia = document.getElementById("numeroDia");
-
         if (numeroDia) {
-            numeroDia.textContent = glam.slogan;
+            numeroDia.textContent =
+                glam.numeroDia || "TODOS RECUERDAN";
         }
 
         const mensajePortada = document.querySelector(".portada .mensaje");
 
         if (mensajePortada && glam.mensajePortada) {
-
-            const partes = glam.mensajePortada.split(" ");
+            const partes = glam.mensajePortada.trim().split(/\s+/);
+            mensajePortada.textContent = "";
 
             if (partes.length > 4) {
-
                 const mitad = Math.ceil(partes.length / 2);
 
-                mensajePortada.innerHTML =
-                    partes.slice(0, mitad).join(" ") +
-                    "<br>" +
-                    partes.slice(mitad).join(" ");
-
+                mensajePortada.append(
+                    document.createTextNode(partes.slice(0, mitad).join(" ")),
+                    document.createElement("br"),
+                    document.createTextNode(partes.slice(mitad).join(" "))
+                );
             } else {
-
                 mensajePortada.textContent = glam.mensajePortada;
-
             }
         }
 
-        const telefonos = document.querySelectorAll(".contacto-datos span");
-
-        if (telefonos.length > 0 && glam.telefono) {
+        if (telefonos.length && glam.telefono) {
             telefonos[0].textContent = glam.telefono;
         }
     }
 
-
     /* =========================================
-       ABRIR GLAM
+       ELEMENTOS Y NAVEGACIÓN PRINCIPAL
     ========================================= */
 
     const botonAbrir = document.getElementById("abrirInvitacion");
+    const portada = document.querySelector(".portada");
+    const selectorServicios = document.getElementById("selectorServicios");
     const contenido = document.getElementById("contenido");
+    const volverPortada = document.getElementById("volverPortada");
 
-    if (botonAbrir && contenido) {
+    const botonServicios = document.getElementById("botonServicios");
+    const opcionesServicios = document.getElementById("opcionesServicios");
+    const iconoServicios = document.getElementById("iconoServicios");
 
-        botonAbrir.addEventListener("click", function () {
+    const paginasServicios = {
+        invitaciones: "invitaciones.html",
+        vajilleria: "vajilleria.html",
+        weddingweek: "wedding-week.html"
+    };
 
-            contenido.classList.remove("oculto");
-
-            contenido.scrollIntoView({
-                behavior: "smooth"
-            });
-
+    function subirPagina() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
     }
 
+    function cerrarMenuServicios() {
+        if (opcionesServicios) {
+            opcionesServicios.classList.add("oculto");
+        }
+
+        if (botonServicios) {
+            botonServicios.setAttribute("aria-expanded", "false");
+        }
+
+        if (iconoServicios) {
+            iconoServicios.textContent = "✦";
+        }
+    }
+
+    function mostrarSelector() {
+        if (portada) portada.classList.add("oculto");
+        if (contenido) contenido.classList.add("oculto");
+
+        if (selectorServicios) {
+            selectorServicios.classList.remove("oculto");
+        }
+
+        cerrarMenuServicios();
+        subirPagina();
+    }
+
+    function mostrarMirror() {
+        if (portada) portada.classList.add("oculto");
+        if (selectorServicios) selectorServicios.classList.add("oculto");
+
+        if (contenido) {
+            contenido.classList.remove("oculto");
+        }
+
+        cerrarMenuServicios();
+        subirPagina();
+    }
+
+    function regresarPortada() {
+        if (selectorServicios) selectorServicios.classList.add("oculto");
+        if (contenido) contenido.classList.add("oculto");
+        if (portada) portada.classList.remove("oculto");
+
+        cerrarMenuServicios();
+        subirPagina();
+    }
+
+    if (botonAbrir) {
+        botonAbrir.addEventListener("click", function (evento) {
+            evento.preventDefault();
+            mostrarSelector();
+        });
+    }
+
+    if (volverPortada) {
+        volverPortada.addEventListener("click", function (evento) {
+            evento.preventDefault();
+            regresarPortada();
+        });
+    }
 
     /* =========================================
-       GALERÍA
+       OPCIONES DEL SELECTOR DE SERVICIOS
+    ========================================= */
+
+    document.querySelectorAll(".servicio-opcion[data-servicio]")
+        .forEach(function (opcion) {
+            opcion.addEventListener("click", function (evento) {
+                const servicio = opcion.dataset.servicio;
+
+                if (servicio === "mirror") {
+                    evento.preventDefault();
+                    mostrarMirror();
+                    return;
+                }
+
+                if (paginasServicios[servicio]) {
+                    evento.preventDefault();
+                    window.location.href = paginasServicios[servicio];
+                }
+            });
+        });
+
+    /* =========================================
+       MENÚ FLOTANTE
+       Un solo controlador para abrir y cerrar
+    ========================================= */
+
+    if (botonServicios && opcionesServicios) {
+        // Estado inicial consistente
+        opcionesServicios.classList.add("oculto");
+        botonServicios.setAttribute("aria-expanded", "false");
+
+        botonServicios.addEventListener("click", function (evento) {
+            evento.preventDefault();
+            evento.stopPropagation();
+
+            const menuEstaCerrado =
+                opcionesServicios.classList.contains("oculto");
+
+            if (menuEstaCerrado) {
+                opcionesServicios.classList.remove("oculto");
+                botonServicios.setAttribute("aria-expanded", "true");
+
+                if (iconoServicios) {
+                    iconoServicios.textContent = "×";
+                }
+            } else {
+                cerrarMenuServicios();
+            }
+        });
+
+        opcionesServicios.querySelectorAll("a, button").forEach(
+            function (enlace) {
+                enlace.addEventListener("click", function (evento) {
+                    const destino = enlace.dataset.destino;
+                    const servicio = enlace.dataset.servicio;
+
+                    if (destino === "mirror" || servicio === "mirror") {
+                        evento.preventDefault();
+                        mostrarMirror();
+                        return;
+                    }
+
+                    if (
+                        destino === "inicio" ||
+                        destino === "portada"
+                    ) {
+                        evento.preventDefault();
+                        regresarPortada();
+                        return;
+                    }
+
+                    // Los demás enlaces mantienen su destino HTML.
+                    cerrarMenuServicios();
+                });
+            }
+        );
+
+        // Cerrar al hacer clic fuera del menú
+        document.addEventListener("click", function (evento) {
+            const clicEnBoton = botonServicios.contains(evento.target);
+            const clicEnOpciones = opcionesServicios.contains(evento.target);
+
+            if (!clicEnBoton && !clicEnOpciones) {
+                cerrarMenuServicios();
+            }
+        });
+    } else {
+        console.warn(
+            "GLAM: verifica los IDs botonServicios y opcionesServicios en el HTML."
+        );
+    }
+
+    // Cerrar el menú con Escape
+    document.addEventListener("keydown", function (evento) {
+        if (evento.key === "Escape") {
+            cerrarMenuServicios();
+        }
+    });
+
+    /* =========================================
+       MENÚ SUPERIOR ANTIGUO (SI EXISTE)
+    ========================================= */
+
+    const menuGlam = document.querySelector(".glam-menu");
+
+    if (menuGlam) {
+        menuGlam.querySelectorAll('a[href^="#"]').forEach(function (enlace) {
+            enlace.addEventListener("click", function (evento) {
+                const selector = enlace.getAttribute("href");
+                const destino = document.querySelector(selector);
+
+                if (!destino) return;
+
+                evento.preventDefault();
+
+                const encabezado =
+                    destino.querySelector(".seccion-encabezado") ||
+                    (
+                        destino.id === "contacto"
+                            ? destino.querySelector(".contacto-texto h2")
+                            : null
+                    ) ||
+                    destino;
+
+                const espacio = window.innerWidth <= 600 ? 85 : 100;
+
+                window.scrollTo({
+                    top: Math.max(
+                        0,
+                        encabezado.getBoundingClientRect().top +
+                        window.scrollY - espacio
+                    ),
+                    behavior: "smooth"
+                });
+
+                menuGlam.querySelectorAll("a.activo").forEach(function (otro) {
+                    otro.classList.remove("activo");
+                });
+
+                enlace.classList.add("activo");
+                history.replaceState(null, "", selector);
+            });
+        });
+    }
+
+    /* =========================================
+       GALERÍA Y VISOR DE FOTOGRAFÍAS
     ========================================= */
 
     const fotos = [
@@ -90,119 +300,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const visor = document.getElementById("visorFoto");
     const fotoGrande = document.getElementById("fotoGrande");
     const cerrarFoto = document.getElementById("cerrarFoto");
-    const anterior = document.getElementById("fotoAnterior");
-    const siguiente = document.getElementById("fotoSiguiente");
+    const fotoAnterior = document.getElementById("fotoAnterior");
+    const fotoSiguiente = document.getElementById("fotoSiguiente");
 
     let indiceActual = 0;
 
-
     function mostrarFoto(indice) {
+        if (!visor || !fotoGrande) return;
 
-        if (!fotoGrande || !visor) {
-            return;
-        }
-
-        indiceActual =
-            (indice + fotos.length) % fotos.length;
-
+        indiceActual = (indice + fotos.length) % fotos.length;
         fotoGrande.src = fotos[indiceActual];
+        fotoGrande.alt = "Foto GLAM " + (indiceActual + 1);
 
         visor.classList.add("activo");
-
         document.body.style.overflow = "hidden";
     }
 
-
     function cerrarVisor() {
-
-        if (!visor) {
-            return;
-        }
+        if (!visor) return;
 
         visor.classList.remove("activo");
-
         document.body.style.overflow = "";
     }
 
-
-    document.querySelectorAll(".foto-glam").forEach(function (foto, indice) {
-
+    document.querySelectorAll(".foto-glam").forEach(function (foto) {
         foto.addEventListener("click", function () {
-            mostrarFoto(indice);
+            const imagen = foto.querySelector("img");
+            const indice = imagen ? Number(imagen.dataset.indice) : 0;
+
+            mostrarFoto(Number.isInteger(indice) ? indice : 0);
         });
-
     });
-
 
     if (cerrarFoto) {
-
         cerrarFoto.addEventListener("click", cerrarVisor);
-
     }
 
-
-    if (anterior) {
-
-        anterior.addEventListener("click", function () {
-
+    if (fotoAnterior) {
+        fotoAnterior.addEventListener("click", function () {
             mostrarFoto(indiceActual - 1);
-
         });
-
     }
 
-
-    if (siguiente) {
-
-        siguiente.addEventListener("click", function () {
-
+    if (fotoSiguiente) {
+        fotoSiguiente.addEventListener("click", function () {
             mostrarFoto(indiceActual + 1);
-
         });
-
     }
-
 
     if (visor) {
-
-        visor.addEventListener("click", function (e) {
-
-            if (e.target === visor) {
-                cerrarVisor();
-            }
-
+        visor.addEventListener("click", function (evento) {
+            if (evento.target === visor) cerrarVisor();
         });
-
     }
-
-
-    /* =========================================
-       TECLADO
-    ========================================= */
-
-    document.addEventListener("keydown", function (e) {
-
-        if (
-            !visor ||
-            !visor.classList.contains("activo")
-        ) {
-            return;
-        }
-
-        if (e.key === "Escape") {
-            cerrarVisor();
-        }
-
-        if (e.key === "ArrowLeft") {
-            mostrarFoto(indiceActual - 1);
-        }
-
-        if (e.key === "ArrowRight") {
-            mostrarFoto(indiceActual + 1);
-        }
-
-    });
-
 
     /* =========================================
        MÚSICA
@@ -212,624 +362,385 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonMusica = document.getElementById("botonMusica");
 
     if (musica && botonMusica) {
-
         botonMusica.addEventListener("click", function () {
-
             if (musica.paused) {
+                musica.play()
+                    .then(function () {
+                        botonMusica.textContent = "🔊";
+                        botonMusica.setAttribute("aria-pressed", "true");
+                        botonMusica.setAttribute("aria-label", "Pausar música");
+                    })
+                    .catch(function (error) {
+                        console.error("Error al reproducir música:", error);
 
-                musica.play();
-
-                botonMusica.textContent = "🔊";
-
+                        alert(
+                            "No se pudo reproducir la música. " +
+                            "Comprueba que exista musica/cancion.mp3."
+                        );
+                    });
             } else {
-
                 musica.pause();
-
                 botonMusica.textContent = "🔇";
-
+                botonMusica.setAttribute("aria-pressed", "false");
+                botonMusica.setAttribute("aria-label", "Reproducir música");
             }
-
         });
-
     }
-
 
     /* =========================================
-       MODAL DE CONTACTO PERSONALIZADO
+       MODAL DE COTIZACIÓN
     ========================================= */
 
-    const abrirCotizacion =
-        document.getElementById("abrirCotizacion");
-
-    const modalCotizacion =
-        document.getElementById("modalCotizacion");
-
-    const cerrarCotizacion =
-        document.getElementById("cerrarCotizacion");
-
-    const formulario =
-        document.getElementById("formularioCotizacion");
-
+    const abrirCotizacion = document.getElementById("abrirCotizacion");
+    const modalCotizacion = document.getElementById("modalCotizacion");
+    const cerrarCotizacion = document.getElementById("cerrarCotizacion");
+    const formulario = document.getElementById("formularioCotizacion");
 
     function abrirModal() {
+        if (!modalCotizacion) return;
 
-        if (modalCotizacion) {
+        modalCotizacion.classList.add("activo");
+        document.body.style.overflow = "hidden";
 
-            modalCotizacion.classList.add("activo");
+        const primerCampo =
+            modalCotizacion.querySelector("input, select, textarea");
 
-            document.body.style.overflow = "hidden";
-
+        if (primerCampo) {
+            primerCampo.focus({ preventScroll: true });
         }
     }
-
 
     function cerrarModal() {
+        if (!modalCotizacion) return;
 
-        if (modalCotizacion) {
-
-            modalCotizacion.classList.remove("activo");
-
-            document.body.style.overflow = "";
-
-        }
+        modalCotizacion.classList.remove("activo");
+        document.body.style.overflow = "";
     }
-
 
     if (abrirCotizacion) {
-
-        abrirCotizacion.addEventListener(
-            "click",
-            abrirModal
-        );
-
+        abrirCotizacion.addEventListener("click", abrirModal);
     }
-
 
     if (cerrarCotizacion) {
-
-        cerrarCotizacion.addEventListener(
-            "click",
-            cerrarModal
-        );
-
+        cerrarCotizacion.addEventListener("click", cerrarModal);
     }
-
 
     if (modalCotizacion) {
-
-        modalCotizacion.addEventListener(
-            "click",
-            function (e) {
-
-                if (e.target === modalCotizacion) {
-                    cerrarModal();
-                }
-
-            }
-        );
-
+        modalCotizacion.addEventListener("click", function (evento) {
+            if (evento.target === modalCotizacion) cerrarModal();
+        });
     }
 
+    /* =========================================
+       TECLADO: VISOR, MODAL Y MENÚ
+    ========================================= */
+
+    document.addEventListener("keydown", function (evento) {
+        if (visor && visor.classList.contains("activo")) {
+            if (evento.key === "Escape") cerrarVisor();
+            if (evento.key === "ArrowLeft") mostrarFoto(indiceActual - 1);
+            if (evento.key === "ArrowRight") mostrarFoto(indiceActual + 1);
+        }
+
+        if (
+            evento.key === "Escape" &&
+            modalCotizacion &&
+            modalCotizacion.classList.contains("activo")
+        ) {
+            cerrarModal();
+        }
+    });
 
     /* =========================================
        EVENTOS GLAM
     ========================================= */
 
-    const eventosGrid =
-        document.getElementById("eventosGrid");
-
+    const eventosGrid = document.getElementById("eventosGrid");
 
     function obtenerEtiquetaEvento(titulo) {
-
         const etiquetas = {
-
             "BODAS": "CELEBRA EL AMOR",
-
             "CUMPLEAÑOS": "CELEBRA A LO GRANDE",
-
             "XV AÑOS": "UNA NOCHE PARA BRILLAR",
-
             "GRADUACIONES": "CELEBRA TU LOGRO",
-
             "EMPRESARIALES": "TU MARCA TAMBIÉN CELEBRA",
-
             "EVENTOS PRIVADOS": "TU MOMENTO, TU ESTILO"
-
         };
 
-        return etiquetas[titulo] || "MOMENTOS GLAM";
+        return etiquetas[String(titulo || "").toUpperCase()]
+            || "MOMENTOS GLAM";
     }
-
 
     if (
         eventosGrid &&
         typeof glam !== "undefined" &&
         Array.isArray(glam.eventos)
     ) {
-
         eventosGrid.innerHTML = "";
 
-
         glam.eventos.forEach(function (evento, indice) {
+            const tarjeta = document.createElement("article");
+            tarjeta.className = "evento-glam-card";
 
-            const tarjeta =
-                document.createElement("article");
+            const imagenContenedor = document.createElement("div");
+            imagenContenedor.className = "evento-glam-imagen";
 
+            const imagen = document.createElement("img");
+            imagen.src = evento.imagen || "";
+            imagen.alt = evento.titulo || "Evento GLAM";
+            imagen.loading = "lazy";
 
-            tarjeta.className =
-                "evento-glam-card";
+            const numero = document.createElement("div");
+            numero.className = "evento-glam-numero";
+            numero.textContent = String(indice + 1).padStart(2, "0");
 
+            imagenContenedor.append(imagen, numero);
 
-            const numero =
-                String(indice + 1).padStart(2, "0");
+            const informacion = document.createElement("div");
+            informacion.className = "evento-glam-info";
 
+            const etiqueta = document.createElement("p");
+            etiqueta.className = "evento-glam-etiqueta";
+            etiqueta.textContent = obtenerEtiquetaEvento(evento.titulo);
 
-            tarjeta.innerHTML =
+            const titulo = document.createElement("h3");
+            titulo.textContent = evento.titulo || "Evento GLAM";
 
-                '<div class="evento-glam-imagen">' +
+            const descripcion = document.createElement("p");
+            descripcion.textContent = evento.descripcion || "";
 
-                    '<img src="' +
-                    evento.imagen +
-                    '" alt="' +
-                    evento.titulo +
-                    '">' +
-
-                    '<div class="evento-glam-numero">' +
-                    numero +
-                    '</div>' +
-
-                '</div>' +
-
-                '<div class="evento-glam-info">' +
-
-                    '<p class="evento-glam-etiqueta">' +
-                    obtenerEtiquetaEvento(evento.titulo) +
-                    '</p>' +
-
-                    '<h3>' +
-                    evento.titulo +
-                    '</h3>' +
-
-                    '<p>' +
-                    evento.descripcion +
-                    '</p>' +
-
-                '</div>';
-
-
+            informacion.append(etiqueta, titulo, descripcion);
+            tarjeta.append(imagenContenedor, informacion);
             eventosGrid.appendChild(tarjeta);
-
         });
-
     }
 
-
     /* =========================================
-       GENERAR PAQUETES
+       PAQUETES GLAM
     ========================================= */
 
-    const paquetesGrid =
-        document.getElementById("paquetesGrid");
-
+    const paquetesGrid = document.getElementById("paquetesGrid");
 
     if (
         paquetesGrid &&
         typeof glam !== "undefined" &&
         Array.isArray(glam.paquetes)
     ) {
-
         paquetesGrid.innerHTML = "";
 
-
         glam.paquetes.forEach(function (paquete, indice) {
-
-            const tarjeta =
-                document.createElement("article");
-
-
-            tarjeta.className =
-                "paquete-card";
-
+            const tarjeta = document.createElement("article");
+            tarjeta.className = "paquete-card";
 
             if (indice === 1) {
-
-                tarjeta.classList.add(
-                    "paquete-destacado"
-                );
-
+                tarjeta.classList.add("paquete-destacado");
             }
 
+            const badge = document.createElement("div");
+            badge.className = "paquete-badge";
+            badge.textContent = "MÁS ELEGIDO";
+            badge.hidden = indice !== 1;
 
-            const badge =
-                indice === 1
-                    ? '<div class="paquete-badge">MÁS ELEGIDO</div>'
-                    : "";
+            const numero = document.createElement("div");
+            numero.className = "paquete-numero";
+            numero.textContent = String(indice + 1).padStart(2, "0");
 
+            const etiqueta = document.createElement("p");
+            etiqueta.className = "paquete-etiqueta";
+            etiqueta.textContent = "EXPERIENCIA";
 
-            const numero =
-                String(indice + 1).padStart(2, "0");
+            const titulo = document.createElement("h3");
+            titulo.textContent = paquete.nombre || "Paquete GLAM";
 
+            const duracion = document.createElement("div");
+            duracion.className = "paquete-duracion";
+            duracion.textContent = paquete.duracion || "";
 
-            const incluye =
-                paquete.incluye
-                    .map(function (item) {
+            const precio = document.createElement("div");
+            precio.className = "paquete-precio";
+            precio.textContent = paquete.precio || "Consultar";
 
-                        return (
-                            "<li>✓ " +
-                            item +
-                            "</li>"
-                        );
+            const descripcion = document.createElement("p");
+            descripcion.className = "paquete-descripcion";
+            descripcion.textContent = paquete.descripcion || "";
 
-                    })
-                    .join("");
+            const lista = document.createElement("ul");
 
+            (Array.isArray(paquete.incluye) ? paquete.incluye : [])
+                .forEach(function (item) {
+                    const li = document.createElement("li");
+                    li.textContent = "✓ " + item;
+                    lista.appendChild(li);
+                });
 
-            tarjeta.innerHTML =
-
-                badge +
-
-                '<div class="paquete-numero">' +
-                numero +
-                '</div>' +
-
-                '<p class="paquete-etiqueta">' +
-                'EXPERIENCIA' +
-                '</p>' +
-
-                '<h3>' +
-                paquete.nombre +
-                '</h3>' +
-
-                '<div class="paquete-duracion">' +
-                paquete.duracion +
-                '</div>' +
-
-                '<div class="paquete-precio">' +
-                paquete.precio +
-                '</div>' +
-
-                '<p class="paquete-descripcion">' +
-                paquete.descripcion +
-                '</p>' +
-
-                '<ul>' +
-                incluye +
-                '</ul>' +
-
-                '<button ' +
-                'class="boton-paquete" ' +
-                'data-paquete="' +
-                paquete.nombre +
-                '" ' +
-                'type="button">' +
-                'COTIZAR' +
-                '</button>';
-
-
-            paquetesGrid.appendChild(tarjeta);
-
-        });
-
-    }
-
-
-    /* =========================================
-       COTIZACIÓN DE PAQUETES → WHATSAPP
-    ========================================= */
-
-    document
-        .querySelectorAll(".boton-paquete")
-        .forEach(function (boton) {
+            const boton = document.createElement("button");
+            boton.className = "boton-paquete";
+            boton.type = "button";
+            boton.dataset.paquete = paquete.nombre || "GLAM";
+            boton.textContent = "COTIZAR";
 
             boton.addEventListener("click", function () {
-
-                const paquete =
-                    boton.dataset.paquete || "";
-
-                abrirFormularioWhatsApp(paquete);
-
+                abrirFormularioWhatsApp(boton.dataset.paquete);
             });
 
-        });
+            tarjeta.append(
+                badge,
+                numero,
+                etiqueta,
+                titulo,
+                duracion,
+                precio,
+                descripcion,
+                lista,
+                boton
+            );
 
+            paquetesGrid.appendChild(tarjeta);
+        });
+    }
 
     /* =========================================
-       FORMULARIO PARA WHATSAPP
+       COTIZACIÓN POR WHATSAPP
     ========================================= */
 
     function abrirFormularioWhatsApp(paquete) {
+        const nombre = prompt("✨ COTIZACIÓN GLAM\n\n¿Cuál es tu nombre?");
+        if (!nombre || !nombre.trim()) return;
 
-        const nombre =
-            prompt(
-                "✨ COTIZACIÓN GLAM\n\n¿Cuál es tu nombre?"
-            );
+        const fecha = prompt("📅 ¿Cuál es la fecha de tu evento?");
+        if (!fecha || !fecha.trim()) return;
 
+        const evento = prompt(
+            "🎉 ¿Qué tipo de evento realizarás?\n\n" +
+            "Ejemplo: Boda, cumpleaños, XV años o graduación."
+        );
+        if (!evento || !evento.trim()) return;
 
-        if (!nombre) {
-            return;
-        }
+        const lugar = prompt(
+            "📍 ¿Dónde se realizará tu evento?\n\n" +
+            "Ejemplo: La Paz, salón de eventos."
+        );
+        if (!lugar || !lugar.trim()) return;
 
-
-        const fecha =
-            prompt(
-                "📅 ¿Cuál es la fecha de tu evento?"
-            );
-
-
-        if (!fecha) {
-            return;
-        }
-
-
-        const evento =
-            prompt(
-                "🎉 ¿Qué tipo de evento realizarás?\n\nEjemplo: Boda, cumpleaños, XV años, graduación..."
-            );
-
-
-        if (!evento) {
-            return;
-        }
-
-
-        const lugar =
-            prompt(
-                "📍 ¿Dónde se realizará tu evento?\n\nEjemplo: La Paz, Salón Los Álamos"
-            );
-
-
-        if (!lugar) {
-            return;
-        }
-
+        const telefonoWhatsApp =
+            typeof glam !== "undefined" && glam.whatsapp
+                ? String(glam.whatsapp).replace(/\D/g, "")
+                : "59172514906";
 
         const mensaje =
             "Hola GLAM ✨\n\n" +
-
             "Quiero cotizar el servicio de Espejo Mágico.\n\n" +
-
-            "👤 Nombre: " +
-            nombre +
-            "\n\n" +
-
-            "📅 Fecha del evento: " +
-            fecha +
-            "\n\n" +
-
-            "🎉 Tipo de evento: " +
-            evento +
-            "\n\n" +
-
-            "📍 Lugar: " +
-            lugar +
-            "\n\n" +
-
-            "✨ Paquete: " +
-            paquete +
-            "\n\n" +
-
+            "👤 Nombre: " + nombre.trim() + "\n" +
+            "📅 Fecha del evento: " + fecha.trim() + "\n" +
+            "🎉 Tipo de evento: " + evento.trim() + "\n" +
+            "📍 Lugar: " + lugar.trim() + "\n" +
+            "✨ Paquete: " + paquete + "\n\n" +
             "Quisiera conocer la disponibilidad y realizar la cotización.";
-
-
-        const numeroWhatsApp =
-            "59172514906";
-
 
         const url =
             "https://wa.me/" +
-            numeroWhatsApp +
+            telefonoWhatsApp +
             "?text=" +
             encodeURIComponent(mensaje);
 
-
-        window.open(
-            url,
-            "_blank"
-        );
-
+        window.open(url, "_blank", "noopener,noreferrer");
     }
 
-
     /* =========================================
-       ENVIAR SOLICITUD PERSONALIZADA
-       GOOGLE SHEETS
+       ENVÍO DEL FORMULARIO PERSONALIZADO
     ========================================= */
 
     if (formulario) {
+        formulario.addEventListener("submit", function (evento) {
+            evento.preventDefault();
 
-        formulario.addEventListener(
-            "submit",
-            function (e) {
+            if (!formulario.reportValidity()) return;
 
-                e.preventDefault();
+            const campos = [
+                "nombreCliente",
+                "telefonoCliente",
+                "tipoEvento",
+                "fechaEvento",
+                "ciudadEvento",
+                "propuestaEvento"
+            ];
 
+            const datos = new URLSearchParams();
+            datos.append("tipoSolicitud", "glam");
 
-                const nombre =
-                    document.getElementById(
-                        "nombreCliente"
-                    ).value.trim();
+            const nombresCampos = {
+                nombreCliente: "nombre",
+                telefonoCliente: "telefono",
+                tipoEvento: "tipoEvento",
+                fechaEvento: "fechaEvento",
+                ciudadEvento: "ciudadEvento",
+                propuestaEvento: "propuesta"
+            };
 
+            campos.forEach(function (id) {
+                const campo = document.getElementById(id);
 
-                const telefono =
-                    document.getElementById(
-                        "telefonoCliente"
-                    ).value.trim();
-
-
-                const tipoEvento =
-                    document.getElementById(
-                        "tipoEvento"
-                    ).value;
-
-
-                const fechaEvento =
-                    document.getElementById(
-                        "fechaEvento"
-                    ).value;
-
-
-                const ciudadEvento =
-                    document.getElementById(
-                        "ciudadEvento"
-                    ).value.trim();
-
-
-                const propuesta =
-                    document.getElementById(
-                        "propuestaEvento"
-                    ).value.trim();
-
-
-                /* =========================================
-                   URL GOOGLE APPS SCRIPT
-                ========================================= */
-
-                const URL_GOOGLE_APPS_SCRIPT =
-                    "https://script.google.com/macros/s/AKfycbxxGWxVhq-ogSxtXAQHJYPza7lf24XMMZDGcE8Tg7SmTLfepyEgZPn2nGpUd43Akj1Fpw/exec";
-
-
-                /* =========================================
-                   PREPARAR DATOS
-                ========================================= */
-
-                const datos =
-                    new URLSearchParams();
-
-
-                datos.append(
-                    "tipoSolicitud",
-                    "glam"
-                );
-
-                datos.append(
-                    "nombre",
-                    nombre
-                );
-
-                datos.append(
-                    "telefono",
-                    telefono
-                );
-
-                datos.append(
-                    "tipoEvento",
-                    tipoEvento
-                );
-
-                datos.append(
-                    "fechaEvento",
-                    fechaEvento
-                );
-
-                datos.append(
-                    "ciudadEvento",
-                    ciudadEvento
-                );
-
-                datos.append(
-                    "propuesta",
-                    propuesta
-                );
-
-
-                /* =========================================
-                   BOTÓN ENVIAR
-                ========================================= */
-
-                const botonEnviar =
-                    formulario.querySelector(
-                        'button[type="submit"]'
-                    );
-
-
-                if (botonEnviar) {
-
-                    botonEnviar.disabled = true;
-
-                    botonEnviar.textContent =
-                        "ENVIANDO...";
-
+                if (campo) {
+                    datos.append(nombresCampos[id], campo.value.trim());
                 }
+            });
 
+            const botonEnviar = formulario.querySelector(
+                'button[type="submit"]'
+            );
 
-                /* =========================================
-                   ENVIAR A GOOGLE SHEETS
-                ========================================= */
+            const textoOriginal = botonEnviar
+                ? botonEnviar.textContent
+                : "";
 
-                fetch(
-                    URL_GOOGLE_APPS_SCRIPT,
-                    {
-                        method: "POST",
-                        body: datos
-                    }
-                )
-
-                    .then(function () {
-
-                        cerrarModal();
-
-                        formulario.reset();
-
-
-                        if (botonEnviar) {
-
-                            botonEnviar.disabled =
-                                false;
-
-                            botonEnviar.textContent =
-                                "ENVIAR SOLICITUD";
-
-                        }
-
-
-                        alert(
-                            "¡RECIBIMOS TU IDEA! ✨\n\n" +
-
-                            "Gracias por confiar en GLAM " +
-                            "y contarnos sobre tu evento.\n\n" +
-
-                            "Nuestro equipo se comunicará " +
-                            "contigo dentro de las próximas " +
-                            "24 horas.\n\n" +
-
-                            "💫 NUESTRO COMPROMISO\n\n" +
-
-                            "Si no te llamamos dentro de las " +
-                            "próximas 24 horas, recibirás un " +
-                            "10% de descuento en tu experiencia GLAM."
-                        );
-
-                    })
-
-                    .catch(function (error) {
-
-                        console.error(
-                            "Error al enviar:",
-                            error
-                        );
-
-
-                        if (botonEnviar) {
-
-                            botonEnviar.disabled =
-                                false;
-
-                            botonEnviar.textContent =
-                                "ENVIAR SOLICITUD";
-
-                        }
-
-
-                        alert(
-                            "No pudimos registrar tu solicitud.\n\n" +
-                            "Por favor intenta nuevamente."
-                        );
-
-                    });
-
+            if (botonEnviar) {
+                botonEnviar.disabled = true;
+                botonEnviar.textContent = "ENVIANDO...";
             }
-        );
 
+            const URL_GOOGLE_APPS_SCRIPT =
+                "https://script.google.com/macros/s/AKfycbxxGWxVhq-ogSxtXAQHJYPza7lf24XMMZDGcE8Tg7SmTLfepyEgZPn2nGpUd43Akj1Fpw/exec";
+
+            fetch(URL_GOOGLE_APPS_SCRIPT, {
+                method: "POST",
+                body: datos
+            })
+                .then(function (respuesta) {
+                    if (!respuesta.ok) {
+                        throw new Error("No se pudo completar el envío.");
+                    }
+
+                    cerrarModal();
+                    formulario.reset();
+
+                    alert(
+                        "¡RECIBIMOS TU IDEA! ✨\n\n" +
+                        "Gracias por confiar en GLAM. Nuestro equipo " +
+                        "se comunicará contigo dentro de las próximas " +
+                        "24 horas.\n\n" +
+                        "Si no te llamamos dentro de ese plazo, " +
+                        "recibirás un 10% de descuento en tu " +
+                        "experiencia GLAM."
+                    );
+                })
+                .catch(function (error) {
+                    console.error("Error al enviar:", error);
+
+                    alert(
+                        "No pudimos confirmar el envío de tu solicitud.\n\n" +
+                        "Por favor, intenta nuevamente o contáctanos " +
+                        "por WhatsApp."
+                    );
+                })
+                .finally(function () {
+                    if (botonEnviar) {
+                        botonEnviar.disabled = false;
+                        botonEnviar.textContent =
+                            textoOriginal || "ENVIAR SOLICITUD";
+                    }
+                });
+        });
     }
 
+    console.log("GLAM: script cargado correctamente.");
 });
