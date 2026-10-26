@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================= */
 
     const fotos = [
-        "imagenes/momento1.jpg",
+        "imagenes/momento1.jpeg",
         "imagenes/momento2.jpeg",
         "imagenes/momento3.jpeg",
         "imagenes/momento4.jpeg",
