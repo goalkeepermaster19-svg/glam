@@ -691,11 +691,13 @@ section {
 
 .evento-glam-info h3 {
     margin: 0 0 12px;
-    color: var(--negro);
+    color: #F2C6D8;
     font-family: "Cormorant Garamond", serif;
     font-size: 35px;
     font-weight: 600;
     line-height: 1;
+}
+
 }
 
 .evento-glam-info p:last-of-type {
