@@ -290,11 +290,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const fotos = [
         "imagenes/momento1.jpg",
-        "imagenes/momento2.jpg",
-        "imagenes/momento3.jpg",
-        "imagenes/momento4.jpg",
-        "imagenes/momento5.jpg",
-        "imagenes/momento6.jpg"
+        "imagenes/momento2.jpeg",
+        "imagenes/momento3.jpeg",
+        "imagenes/momento4.jpeg",
+        "imagenes/momento5.jpeg",
+        "imagenes/momento6.jpeg"
     ];
 
     const visor = document.getElementById("visorFoto");
